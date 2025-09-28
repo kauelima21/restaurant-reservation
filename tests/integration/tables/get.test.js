@@ -3,24 +3,55 @@ import { CreateTable } from "../../../src/services/createTable.js";
 import orchestrator from "../../orchestrator.js";
 
 beforeAll(async () => {
-  await orchestrator.clearTables();
+  await orchestrator.clearDatabase();
 });
 
 describe("GET - Tables", () => {
-  test("with valid input", async () => {
-    const tablePayload = {
-      name: "Table #1",
-      capacity: 6,
-    };
+  describe("with authenticated user", () => {
+    test("with valid input", async () => {
+      const tablePayload = {
+        name: "Table #1",
+        capacity: 6,
+      };
 
-    await new CreateTable().execute(tablePayload);
+      await new CreateTable().execute(tablePayload);
 
-    const response = await fetch(`${LOCAL_URL}/tables`);
+      const { accessToken } = await orchestrator.createAndAuthenticateUser();
 
-    expect(response.status).toBe(200);
+      const response = await fetch(`${LOCAL_URL}/tables`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
 
-    const responseBody = await response.json();
+      expect(response.status).toBe(200);
 
-    expect(responseBody.tables.length).toBeGreaterThan(0);
+      const responseBody = await response.json();
+
+      expect(responseBody.tables.length).toBeGreaterThan(0);
+    });
+  });
+
+  describe("with unauthenticated user", () => {
+    test("with valid input", async () => {
+      const tablePayload = {
+        name: "Table #1",
+        capacity: 6,
+      };
+
+      await new CreateTable().execute(tablePayload);
+
+      const accessToken = "unreal token";
+
+      const response = await fetch(`${LOCAL_URL}/tables`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+
+      expect(response.status).toBe(401);
+    });
   });
 });

@@ -3,7 +3,7 @@ import orchestrator from "../../orchestrator.js";
 import { CreateUser } from "../../../src/services/createUser.js";
 
 beforeAll(async () => {
-  await orchestrator.clearUsers();
+  await orchestrator.clearDatabase();
 });
 
 describe("POST - Sign In", () => {

@@ -2,7 +2,7 @@ import { LOCAL_URL } from "../../../src/config.js";
 import orchestrator from "../../orchestrator.js";
 
 beforeAll(async () => {
-  await orchestrator.clearUsers();
+  await orchestrator.clearDatabase();
 });
 
 describe("POST - Sign Up", () => {

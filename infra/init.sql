@@ -5,3 +5,10 @@ CREATE TABLE IF NOT EXISTS users (
   password VARCHAR(255) NOT NULL,
   role VARCHAR(255) NOT NULL
 );
+
+CREATE TABLE IF NOT EXISTS tables (
+  id uuid DEFAULT gen_random_uuid() PRIMARY KEY NOT NULL,
+  name VARCHAR(255),
+  capacity INT,
+  status VARCHAR(255) NOT NULL
+);

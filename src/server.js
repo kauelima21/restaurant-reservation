@@ -12,6 +12,7 @@ app.post("/sign-up", (req, res) => AuthController.signUp(req, res));
 app.post("/sign-in", (req, res) => AuthController.signIn(req, res));
 
 // TABLES
+app.get("/tables", (req, res) => TableController.fetchTables(req, res));
 app.post("/tables", (req, res) => TableController.createTable(req, res));
 
 app.listen(PORT, () => {

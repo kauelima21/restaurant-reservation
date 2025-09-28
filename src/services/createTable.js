@@ -10,7 +10,7 @@ export class CreateTable {
         INSERT INTO tables(name, capacity, status)
         VALUES ($1, $2, $3)
         RETURNING
-          *
+          *;
       `,
       values: [table.name, table.capacity, table.status],
     });

@@ -12,7 +12,7 @@ export class CreateUser {
         INSERT INTO users(name, email, password, role)
         VALUES ($1, $2, $3, $4)
         RETURNING
-          *
+          *;
       `,
       values: [user.name, user.email, user.password, user.role],
     });

@@ -12,7 +12,7 @@ async function createAndAuthenticateUser(user) {
   const userPayload = {
     name: user?.name ?? faker.person.fullName(),
     email: user?.email ?? faker.internet.email(),
-    password: user?.password ?? faker.string.alphanumeric(8),
+    password: user?.password ?? `${faker.string.alphanumeric(8)}12345`,
     role: user?.role ?? "customer",
   };
 

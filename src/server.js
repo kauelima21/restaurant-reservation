@@ -23,6 +23,16 @@ app.post(
   (req, res, next) => AuthMiddleware.handle(req, res, next, ["admin"]),
   TableController.createTable
 );
+app.patch(
+  "/tables/:id",
+  (req, res, next) => AuthMiddleware.handle(req, res, next, ["admin"]),
+  TableController.editTable
+);
+app.delete(
+  "/tables/:id",
+  (req, res, next) => AuthMiddleware.handle(req, res, next, ["admin"]),
+  TableController.deleteTable
+);
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

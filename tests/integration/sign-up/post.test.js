@@ -1,7 +1,7 @@
 import { LOCAL_URL } from "../../../src/config.js";
 import orchestrator from "../../orchestrator.js";
 
-beforeAll(async () => {
+beforeEach(async () => {
   await orchestrator.clearDatabase();
 });
 

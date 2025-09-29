@@ -4,8 +4,9 @@ import { AuthenticateUser } from "../src/services/authenticateUser";
 import { CreateUser } from "../src/services/createUser";
 
 async function clearDatabase() {
-  await database.query("DELETE FROM users;");
-  await database.query("DELETE FROM tables;");
+  await database.query("TRUNCATE reservations RESTART IDENTITY CASCADE;");
+  await database.query("TRUNCATE users RESTART IDENTITY CASCADE;");
+  await database.query("TRUNCATE tables RESTART IDENTITY CASCADE;");
 }
 
 async function createAndAuthenticateUser(user) {

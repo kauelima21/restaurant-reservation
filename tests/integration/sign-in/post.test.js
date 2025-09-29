@@ -2,7 +2,7 @@ import { LOCAL_URL } from "../../../src/config.js";
 import orchestrator from "../../orchestrator.js";
 import { CreateUser } from "../../../src/services/createUser.js";
 
-beforeAll(async () => {
+beforeEach(async () => {
   await orchestrator.clearDatabase();
 });
 

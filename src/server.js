@@ -3,6 +3,7 @@ import { PORT } from "./config.js";
 import { AuthController } from "./controllers/authController.js";
 import { TableController } from "./controllers/tableController.js";
 import { AuthMiddleware } from "./middlewares/AuthMiddleware.js";
+import { ReservationController } from "./controllers/reservationController.js";
 
 const app = express();
 
@@ -32,6 +33,23 @@ app.delete(
   "/tables/:id",
   (req, res, next) => AuthMiddleware.handle(req, res, next, ["admin"]),
   TableController.deleteTable
+);
+
+// RESERVATIONS
+app.get(
+  "/reservations",
+  (req, res, next) => AuthMiddleware.handle(req, res, next),
+  ReservationController.fetchReservations
+);
+app.post(
+  "/reservations",
+  (req, res, next) => AuthMiddleware.handle(req, res, next),
+  ReservationController.createReservation
+);
+app.patch(
+  "/reservations/:id/cancel",
+  (req, res, next) => AuthMiddleware.handle(req, res, next),
+  ReservationController.cancelReservation
 );
 
 app.listen(PORT, () => {
